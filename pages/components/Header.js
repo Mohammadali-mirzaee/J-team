@@ -23,7 +23,8 @@ const Head = styled.header`
   align-items: center;
   height: 4rem;
   width: 100%;
-  background: #000;
+  max-width: 100%;
+  background: #111;
   color: #fff;
 `;
 const Logo = styled.div`

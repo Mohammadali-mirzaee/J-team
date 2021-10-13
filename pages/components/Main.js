@@ -13,6 +13,13 @@ const Main = () => {
           <h1 className="ji-team">JTeam</h1>
         </div>
       </article>
+      <Admin>
+        <div className="admin-person">
+          <Image height={50} width={50} src="/images/jimi.jpg" />
+          <p>Jimi Tadi</p>
+          <p>Admin</p>
+        </div>
+      </Admin>
 
       <div className="all-card">
         <Container>
@@ -95,11 +102,13 @@ const Wrapper = styled.div`
   padding-left: 5rem;
   padding-right: 5rem;
   width: 100%;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   article {
     margin-top: 5rem;
     height: 100px;
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -134,11 +143,17 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
+  max-width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
   .wrap-card {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding-top: 5rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 3rem;
+    width: 70%;
 
     div {
       width: 14rem;
@@ -167,7 +182,7 @@ const Container = styled.div`
         height: 30px;
         width: 30px;
         border-radius: 50px;
-        background: red;
+        background: #f9f9f9;
       }
       button {
         margin-top: 20px;
@@ -185,6 +200,27 @@ const Container = styled.div`
       button:hover {
         background: red;
       }
+    }
+  }
+`;
+const Admin = styled.div`
+  margin-top: 2rem;
+  align-items: center;
+  justify-content: left;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  display: flex;
+  .admin-person {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    p {
+      margin: 0;
+      font-weight: 500;
+    }
+    img {
+      border-radius: 50%;
     }
   }
 `;
