@@ -6,8 +6,8 @@ const Header = () => {
       <Logo>
         <Image
           src="/logotyp-jiroy.svg"
-          height={20}
-          width={20}
+          height={25}
+          width={25}
           layout="responsive"
         />
       </Logo>
@@ -28,6 +28,6 @@ const Head = styled.header`
   color: #fff;
 `;
 const Logo = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 `;

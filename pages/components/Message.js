@@ -27,6 +27,10 @@ const MessageCard = styled.div`
   flex-direction: column;
   text-align: left;
   position: fixed;
+  @media (max-width: 768px) {
+    width: 300px;
+    height: 350px;
+  }
   > div {
     padding-left: 2rem;
     padding-right: 2rem;
