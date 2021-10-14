@@ -25,7 +25,7 @@ const Main = () => {
       </article>
 
       <Admin>
-        <div className="admin-person">
+        <div onClick={toggleMessage} className="admin-person">
           <Image height={60} width={60} src="/images/jimi.jpg" />
           <p>Jimi Tadi</p>
           <p>Admin</p>
