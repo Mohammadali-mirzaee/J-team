@@ -1,7 +1,17 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-
+import { useState } from 'react';
+import Message from './Message';
 const Main = () => {
+  const [toggle, setToggle] = useState(false);
+  function toggleMessage() {
+    setToggle(true);
+  }
+
+  const closeModal = () => {
+    setToggle(false);
+  };
+
   return (
     <Wrapper>
       <article>
@@ -13,13 +23,21 @@ const Main = () => {
           <h1 className="ji-team">JTeam</h1>
         </div>
       </article>
+
       <Admin>
         <div className="admin-person">
-          <Image height={50} width={50} src="/images/jimi.jpg" />
+          <Image height={60} width={60} src="/images/jimi.jpg" />
           <p>Jimi Tadi</p>
           <p>Admin</p>
         </div>
       </Admin>
+
+      {toggle && (
+        <Modal>
+          <div className="overlay" onClick={closeModal}></div>
+          <Message />
+        </Modal>
+      )}
 
       <div className="all-card">
         <Container>
@@ -31,7 +49,7 @@ const Main = () => {
               <p>Roy josefsson</p>
               <div className="circle-status"></div>
 
-              <button>
+              <button onClick={toggleMessage}>
                 <p>Send</p>
               </button>
             </div>
@@ -41,7 +59,7 @@ const Main = () => {
               </div>
               <p>Martin Lindström</p>
               <div className="circle-status"></div>
-              <button>
+              <button onClick={toggleMessage}>
                 <p>Send</p>
               </button>
             </div>
@@ -51,7 +69,7 @@ const Main = () => {
               </div>
               <p>Joel Nord</p>
               <div className="circle-status"></div>
-              <button>
+              <button onClick={toggleMessage}>
                 <p>Send</p>
               </button>
             </div>
@@ -65,7 +83,7 @@ const Main = () => {
               </div>
               <p>John Ghavamzadeh</p>
               <div className="circle-status"></div>
-              <button>
+              <button onClick={toggleMessage}>
                 <p>Send</p>
               </button>
             </div>
@@ -75,17 +93,31 @@ const Main = () => {
               </div>
               <p>Farid Bokhaled</p>
               <div className="circle-status"></div>
-              <button>
+              <button onClick={toggleMessage}>
                 <p>Send</p>
               </button>
             </div>
+            <div>
+              <div className="circle-person">
+                <Image height={100} width={100} src="/images/jEric.jpg" />
+              </div>
+              <p>John-Eric Udd</p>
+              <div className="circle-status"></div>
+              <button onClick={toggleMessage}>
+                <p>Send</p>
+              </button>
+            </div>
+          </div>
+        </Container>
+        <Container>
+          <div className="wrap-card">
             <div>
               <div className="circle-person">
                 <Image height={100} width={100} src="/images/mohammad.jpg" />
               </div>
               <p>Mohammadali Mirzaee</p>
               <div className="circle-status"></div>
-              <button>
+              <button onClick={toggleMessage}>
                 <p>Send</p>
               </button>
             </div>
@@ -105,6 +137,10 @@ const Wrapper = styled.div`
   max-width: 100%;
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   article {
     margin-top: 5rem;
     height: 100px;
@@ -114,25 +150,44 @@ const Wrapper = styled.div`
     align-items: center;
     border-bottom: 1px solid #000;
     padding-bottom: 5rem;
+    @media (max-width: 768px) {
+      margin-top: 2rem;
+      padding-bottom: 3rem;
+    }
     > div {
       display: flex;
       padding-left: 5rem;
       justify-content: space-around;
       align-items: center;
+      @media (max-width: 768px) {
+        padding: 0;
+      }
       > h1 {
         font-size: 2rem;
         font-weight: 500;
+        @media (max-width: 768px) {
+          font-size: 1.6rem;
+        }
       }
       p {
         padding-left: 1.2rem;
         font-size: 1.8rem;
+        @media (max-width: 768px) {
+          font-size: 1.5rem;
+        }
       }
     }
     div {
       padding-right: 5rem;
+      @media (max-width: 768px) {
+        padding-right: 0;
+      }
       .ji-team {
         font-size: 5rem;
         font-weight: 100;
+        @media (max-width: 768px) {
+          font-size: 3.5rem;
+        }
       }
     }
   }
@@ -154,16 +209,29 @@ const Container = styled.div`
     align-items: center;
     padding-top: 3rem;
     width: 70%;
+    @media (max-width: 768px) {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 0rem;
+    }
 
     div {
       width: 14rem;
       height: 20rem;
       background: #eeeeee;
-      border-radius: 10%;
+      border-radius: 1rem;
       display: flex;
       align-items: center;
       flex-direction: column;
 
+      @media (max-width: 768px) {
+        margin-top: 2rem;
+      }
       p {
         font-weight: 500;
       }
@@ -174,6 +242,7 @@ const Container = styled.div`
         border-radius: 50%;
         background: #c4c4c4;
         display: flex;
+
         img {
           border-radius: 50%;
         }
@@ -210,6 +279,11 @@ const Admin = styled.div`
   padding-left: 5rem;
   padding-right: 5rem;
   display: flex;
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .admin-person {
     display: flex;
     align-items: center;
@@ -222,5 +296,28 @@ const Admin = styled.div`
     img {
       border-radius: 50%;
     }
+  }
+`;
+const Modal = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.2;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 `;

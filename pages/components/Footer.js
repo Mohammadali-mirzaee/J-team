@@ -6,11 +6,7 @@ const Footer = () => {
       <div>
         <Image src="/logotyp-jiroy.svg" height={300} width={300} />
       </div>
-      <b className="logo">
-        {/*   <div>
-          <div></div>
-        </div> */}
-      </b>
+      <b className="logo"></b>
     </FooterWrap>
   );
 };
@@ -21,34 +17,26 @@ const FooterWrap = styled.footer`
   padding-left: 5rem;
   padding-right: 5rem;
   width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media (max-width: 768px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   div {
     padding-top: 5rem;
+    @media (max-width: 768px) {
+      padding-top: 2rem;
+
+      img {
+        width: 150px;
+        height: 150px;
+      }
+    }
   }
   .logo {
-    /*  padding-top: 5rem;
-    width: 500px;
-    height: 500px;
-    background: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    div {
-      width: 350px;
-      height: 350px;
-      background: red;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      div {
-        width: 200px;
-        height: 200px;
-        background: #fff;
-        border-radius: 50%;
-      }
-    } */
     height: 400px;
     width: 400px;
     border: 3vw solid white;
@@ -58,6 +46,11 @@ const FooterWrap = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
+    @media (max-width: 768px) {
+      height: 150px;
+      width: 150px;
+      border: 3.9vw solid white;
+    }
     &:after {
       content: '';
       height: 200px;
@@ -65,6 +58,10 @@ const FooterWrap = styled.footer`
       background: white;
       border-radius: 50%;
       z-index: 2;
+      @media (max-width: 768px) {
+        height: 75px;
+        width: 75px;
+      }
     }
   }
 `;
