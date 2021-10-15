@@ -1,11 +1,48 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-const Message = () => {
+const Message = ({ userId }) => {
   const [valid, setValid] = useState(false);
+  const [about, setAbout] = useState('');
+  const [message, setMessage] = useState('');
+  const [priority, setPriority] = useState(-1);
 
-  const validatAbout = (e) => {
-    setValid(e.taget.value !== '');
+  /*   const validatAbout = (e) => {
+    const about = e.target.value;
+    if (about === '') {
+      setValid(false);
+      return;
+    }
+    setAbout(about);
+  }; */
+
+  const onMessageChange = (e) => {
+    const message = e.target.value;
+    setMessage(message);
+
+    if (message === '') {
+      return;
+    }
   };
+
+  const priorit = [
+    {
+      name: '1',
+      value: 1,
+    },
+    {
+      name: '2',
+      value: 2,
+    },
+    {
+      name: '3',
+      value: 3,
+    },
+  ];
+  const onChangePriority = (e, priority) => {
+    e.preventDefault();
+    setPriority(priority);
+  };
+
   /**
    * const validatAbout = () => {
    * const about = e.target.value
@@ -18,32 +55,54 @@ const Message = () => {
    */
 
   const sendMessage = async () => {
-    console.log('Send');
+    console.log({ userId, about, message });
     const response = await fetch(
-      'https://hooks.slack.com/services/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',
+      'https://api.jiroy.com/api/slack/sendPrivateMessage',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'Application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        body: JSON.stringify({ text: 'Test' }),
+        body: JSON.stringify({
+          id: userId,
+          message: message,
+          priority: priority,
+        }),
       }
     );
     const data = await response.json();
     console.log(data);
   };
+
   return (
     <MessageCard>
-      <div>
-        <p>About</p>
-        <input onChange={validatAbout} type="text" placeholder="About"></input>
+      <div className="p-text">
+        <p>Prioritera</p>
+      </div>
+      <div className="priorit-box">
+        {priorit.map((x) => (
+          <button
+            onClick={(e) => onChangePriority(e, x.value)}
+            className="priority"
+            value={x.value}
+          >
+            {x.name}
+          </button>
+        ))}
       </div>
       <div className="message-area">
-        <p>Message</p>
-        <textarea placeholder="Your Massage"></textarea>
+        <p>Agenda</p>
+        <textarea
+          value={message}
+          onChange={onMessageChange}
+          type="buttton"
+          placeholder="Agenda"
+        ></textarea>
       </div>
-      <button onClick={sendMessage}>Send</button>
+      <button className="send-btn" onClick={sendMessage}>
+        Send
+      </button>
     </MessageCard>
   );
 };
@@ -64,22 +123,34 @@ const MessageCard = styled.div`
     width: 300px;
     height: 350px;
   }
-  > div {
+
+  .priorit-box {
     padding-left: 2rem;
     padding-right: 2rem;
     width: 100%;
     max-width: 100%;
-    input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .priority {
       width: 100%;
       height: 2.5rem;
-      border-radius: 0.5rem;
+      border-radius: 1rem;
+      background: #c4c4c4;
+      margin-right: 1rem;
       border: none;
     }
-    input:focus {
-      outline: none;
+    .priority:hover {
+      border: 1px solid #e41513;
+      background: #c4c4c4;
     }
   }
   .message-area {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 100%;
+    max-width: 100%;
     textarea {
       width: 100%;
       border-radius: 0.5rem;
@@ -89,8 +160,8 @@ const MessageCard = styled.div`
       outline: none;
     }
   }
-  button {
-    margin-top: 3rem;
+  .send-btn {
+    margin-top: 2rem;
     height: 2.5rem;
     width: 50%;
     border-radius: 3rem;

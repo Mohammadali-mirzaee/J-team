@@ -1,15 +1,71 @@
 import styled from '@emotion/styled';
+import image from 'next/image';
 import Image from 'next/image';
 import { useState } from 'react';
 import Message from './Message';
 const Main = () => {
   const [toggle, setToggle] = useState(false);
-  function toggleMessage() {
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  function toggleMessage(userId) {
     setToggle(true);
+    setSelectedUserId(userId);
   }
 
   const closeModal = () => {
     setToggle(false);
+    setSelectedUserId(null);
+  };
+
+  const admins = [
+    {
+      name: 'Jimi Tadi',
+      image: '/images/jimi.jpg',
+      id: 'B02HSG6763V/GamIFiunsbN8uoXoEfwmuP2q',
+    },
+  ];
+
+  const users = {
+    firstRow: [
+      {
+        name: 'Roy Josefsson',
+        image: '/images/roy.jpg',
+        id: 'B02HKJ752LW/qnu4DelG5wGFFReHGsRVngj2',
+      },
+      {
+        name: 'Martin Lindström',
+        image: '/images/martin.jpg',
+        id: ' B02J54A0HJ5/I4h5H1HiV3O7iGZ8LHhhjpm9',
+      },
+      {
+        name: 'Joel Nord',
+        image: '/images/joel.jpg',
+        id: 'B02HBR43E7R/NxJwiccBJANVWW9a8tTYBdVd',
+      },
+    ],
+    secondRow: [
+      {
+        name: 'John Ghavamzade',
+        image: '/images/john.jpg',
+        id: 'B02JG5WMTK2/rnlnMDRszcGUlMaIOCrX7ATg',
+      },
+      {
+        name: 'Farid Boukhaled',
+        image: '/images/farid.jpg',
+        id: '',
+      },
+      {
+        name: 'John-Eric Uddh',
+        image: '/images/jEric.jpg',
+        id: 'B02HSG4PMPV/VySolMa4NI4EhDDlhaGvPn4x',
+      },
+    ],
+    thirdRow: [
+      {
+        name: 'Mohammadali Mirzaee',
+        image: '/images/mohammad.jpg',
+        id: 'B02HBR57GUX/XxBvlWv6vSd7YgWZKJDwShwH',
+      },
+    ],
   };
 
   return (
@@ -17,110 +73,78 @@ const Main = () => {
       <article>
         <div>
           <h1>People</h1>
-          <p>8</p>
+          <p></p>
         </div>
         <div>
           <h1 className="ji-team">JTeam</h1>
         </div>
       </article>
 
-      <Admin>
-        <div onClick={toggleMessage} className="admin-person">
-          <Image height={60} width={60} src="/images/jimi.jpg" />
-          <p>Jimi Tadi</p>
-          <p>Admin</p>
-        </div>
-      </Admin>
+      {admins.map((x) => (
+        <Admin>
+          <div onClick={() => toggleMessage(x.id)} className="admin-person">
+            <Image height={60} width={60} src={x.image} />
+            <p>Jimi Tadi</p>
+            <p>Admin</p>
+          </div>
+        </Admin>
+      ))}
 
       {toggle && (
         <Modal>
           <div className="overlay" onClick={closeModal}></div>
-          <Message />
+          <Message userId={selectedUserId} />
         </Modal>
       )}
 
       <div className="all-card">
         <Container>
           <div className="wrap-card">
-            <div>
-              <div className="circle-person">
-                <Image height={100} width={100} src="/images/roy.jpg" />
-              </div>
-              <p>Roy josefsson</p>
-              <div className="circle-status"></div>
+            {users.firstRow.map((x) => (
+              <div>
+                <div className="circle-person">
+                  <Image height={100} width={100} src={x.image} />
+                </div>
+                <p>{x.name}</p>
+                <div className="circle-status"></div>
 
-              <button onClick={toggleMessage}>
-                <p>Send</p>
-              </button>
-            </div>
-            <div>
-              <div className="circle-person">
-                <Image height={100} width={100} src="/images/martin.jpg" />
+                <button onClick={() => toggleMessage(x.id)}>
+                  <p>Send</p>
+                </button>
               </div>
-              <p>Martin Lindström</p>
-              <div className="circle-status"></div>
-              <button onClick={toggleMessage}>
-                <p>Send</p>
-              </button>
-            </div>
-            <div>
-              <div className="circle-person">
-                <Image height={100} width={100} src="/images/joel.jpg" />
-              </div>
-              <p>Joel Nord</p>
-              <div className="circle-status"></div>
-              <button onClick={toggleMessage}>
-                <p>Send</p>
-              </button>
-            </div>
+            ))}
           </div>
         </Container>
         <Container>
           <div className="wrap-card">
-            <div>
-              <div className="circle-person">
-                <Image height={100} width={100} src="/images/john.jpg" />
+            {users.secondRow.map((x) => (
+              <div>
+                <div className="circle-person">
+                  <Image height={100} width={100} src={x.image} />
+                </div>
+                <p>{x.name}</p>
+                <div className="circle-status"></div>
+                <button onClick={() => toggleMessage(x.id)}>
+                  <p>Send</p>
+                </button>
               </div>
-              <p>John Ghavamzadeh</p>
-              <div className="circle-status"></div>
-              <button onClick={toggleMessage}>
-                <p>Send</p>
-              </button>
-            </div>
-            <div>
-              <div className="circle-person">
-                <Image height={100} width={100} src="/images/farid.jpg" />
-              </div>
-              <p>Farid Bokhaled</p>
-              <div className="circle-status"></div>
-              <button onClick={toggleMessage}>
-                <p>Send</p>
-              </button>
-            </div>
-            <div>
-              <div className="circle-person">
-                <Image height={100} width={100} src="/images/jEric.jpg" />
-              </div>
-              <p>John-Eric Udd</p>
-              <div className="circle-status"></div>
-              <button onClick={toggleMessage}>
-                <p>Send</p>
-              </button>
-            </div>
+            ))}
           </div>
         </Container>
         <Container>
           <div className="wrap-card">
-            <div>
-              <div className="circle-person">
-                <Image height={100} width={100} src="/images/mohammad.jpg" />
+            {users.thirdRow.map((x) => (
+              <div>
+                <div className="circle-person">
+                  <Image height={100} width={100} src={x.image} />
+                </div>
+                <p>{x.name}</p>
+                <div className="circle-status"></div>
+                <button onClick={() => toggleMessage(x.id)}>
+                  <p>Send</p>
+                </button>
               </div>
-              <p>Mohammadali Mirzaee</p>
-              <div className="circle-status"></div>
-              <button onClick={toggleMessage}>
-                <p>Send</p>
-              </button>
-            </div>
+            ))}
           </div>
         </Container>
       </div>
