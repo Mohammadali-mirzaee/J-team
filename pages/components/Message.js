@@ -20,21 +20,22 @@ const Message = ({ userId }) => {
     setMessage(message);
 
     if (message === '') {
-      return;
+      setValid(false);
     }
+    return setValid(true);
   };
 
   const priorit = [
     {
-      name: '1',
+      name: 'Prio 1',
       value: 1,
     },
     {
-      name: '2',
+      name: 'Prio 2',
       value: 2,
     },
     {
-      name: '3',
+      name: 'Prio 3',
       value: 3,
     },
   ];
@@ -72,6 +73,8 @@ const Message = ({ userId }) => {
       }
     );
     const data = await response.json();
+
+    // Add userId to Redux array
     console.log(data);
   };
 
@@ -98,6 +101,7 @@ const Message = ({ userId }) => {
           onChange={onMessageChange}
           type="buttton"
           placeholder="Agenda"
+          className="message-Fields"
         ></textarea>
       </div>
       <button className="send-btn" onClick={sendMessage}>
@@ -151,13 +155,22 @@ const MessageCard = styled.div`
     padding-right: 2rem;
     width: 100%;
     max-width: 100%;
-    textarea {
+
+    .message-Fields {
       width: 100%;
       border-radius: 0.5rem;
       height: 6rem;
+      border: none;
     }
-    textarea:focus {
+    .message-Fields:focus {
       outline: none;
+    }
+
+    .success {
+      border-color: #198754;
+    }
+    .error {
+      border-color: #dc3545;
     }
   }
   .send-btn {

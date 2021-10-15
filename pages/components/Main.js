@@ -3,9 +3,12 @@ import image from 'next/image';
 import Image from 'next/image';
 import { useState } from 'react';
 import Message from './Message';
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+
 const Main = () => {
   const [toggle, setToggle] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [statusIsColored, setStatusIscolored] = useState(false);
   function toggleMessage(userId) {
     setToggle(true);
     setSelectedUserId(userId);
@@ -68,12 +71,15 @@ const Main = () => {
     ],
   };
 
+  const userLenth =
+    users.firstRow.length + users.secondRow.length + users.thirdRow.length;
+
   return (
     <Wrapper>
       <article>
         <div>
           <h1>People</h1>
-          <p></p>
+          <p>{userLenth}</p>
         </div>
         <div>
           <h1 className="ji-team">JTeam</h1>
@@ -106,7 +112,9 @@ const Main = () => {
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className="circle-status"></div>
+                <div className="circle-status">
+                  <DoneOutlinedIcon style={{ fill: 'red' }} />
+                </div>
 
                 <button onClick={() => toggleMessage(x.id)}>
                   <p>Send</p>
@@ -123,7 +131,9 @@ const Main = () => {
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className="circle-status"></div>
+                <div className="circle-status">
+                  <DoneOutlinedIcon style={{ fill: 'red' }} />
+                </div>
                 <button onClick={() => toggleMessage(x.id)}>
                   <p>Send</p>
                 </button>
@@ -139,7 +149,9 @@ const Main = () => {
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className="circle-status"></div>
+                <div className="circle-status">
+                  <DoneOutlinedIcon style={{ fill: 'red' }} />
+                </div>
                 <button onClick={() => toggleMessage(x.id)}>
                   <p>Send</p>
                 </button>
@@ -276,6 +288,7 @@ const Container = styled.div`
         width: 30px;
         border-radius: 50px;
         background: #f9f9f9;
+        border: 1px solid red;
       }
       button {
         margin-top: 20px;
