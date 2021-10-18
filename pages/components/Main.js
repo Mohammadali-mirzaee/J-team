@@ -23,7 +23,7 @@ const Main = () => {
     {
       name: 'Jimi Tadi',
       image: '/images/jimi.jpg',
-      id: 'B02HSG6763V/GamIFiunsbN8uoXoEfwmuP2q',
+      id: 'B02J36213AP/9rZGO1Ab9LWnID8GxFqwwPoi',
     },
   ];
 
