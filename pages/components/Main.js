@@ -32,41 +32,41 @@ const Main = () => {
       {
         name: 'Roy Josefsson',
         image: '/images/roy.jpg',
-        id: 'B02HKJ752LW/qnu4DelG5wGFFReHGsRVngj2',
+        id: 'B02J5BVD4AG/WR85XKPrMYhJOlEJX5gdyrWa',
       },
       {
         name: 'Martin Lindström',
         image: '/images/martin.jpg',
-        id: ' B02J54A0HJ5/I4h5H1HiV3O7iGZ8LHhhjpm9',
+        id: ' B02JSRJDU00/OvFT630mXlyv5g8i8J2nEMXg',
       },
       {
         name: 'Joel Nord',
         image: '/images/joel.jpg',
-        id: 'B02HBR43E7R/NxJwiccBJANVWW9a8tTYBdVd',
+        id: 'B02J362LARH/kEaC4oxWw0ndLyRm2WFvFUy4',
       },
     ],
     secondRow: [
       {
         name: 'John Ghavamzade',
         image: '/images/john.jpg',
-        id: 'B02JG5WMTK2/rnlnMDRszcGUlMaIOCrX7ATg',
+        id: 'B02HNF6Q5F1/UMfa4EuPO4gnT8uu4tWqNEQ2',
       },
       {
         name: 'Farid Boukhaled',
         image: '/images/farid.jpg',
-        id: '',
+        id: 'B02J36131V1/zjqWl0GEHiUqPjD6rqbeLJFu',
       },
       {
         name: 'John-Eric Uddh',
         image: '/images/jEric.jpg',
-        id: 'B02HSG4PMPV/VySolMa4NI4EhDDlhaGvPn4x',
+        id: 'B02JSRDSM0Q/Ker4p52RfxsoABT1ueIcaHZT',
       },
     ],
     thirdRow: [
       {
         name: 'Mohammadali Mirzaee',
         image: '/images/mohammad.jpg',
-        id: 'B02HBR57GUX/XxBvlWv6vSd7YgWZKJDwShwH',
+        id: 'B02JSQD1NSU/1bzvW6qpgMPQcW8xbRUyJq0e',
       },
     ],
   };
