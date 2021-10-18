@@ -1,14 +1,15 @@
 import styled from '@emotion/styled';
-import image from 'next/image';
 import Image from 'next/image';
 import { useState } from 'react';
 import Message from './Message';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-
+import { useSelector, useDispatch } from 'react-redux';
 const Main = () => {
   const [toggle, setToggle] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [statusIsColored, setStatusIscolored] = useState(false);
+  const users = useSelector((state) => state.reducer.users);
+  const admins = useSelector((state) => state.reducer.admins);
+
   function toggleMessage(userId) {
     setToggle(true);
     setSelectedUserId(userId);
@@ -19,60 +20,7 @@ const Main = () => {
     setSelectedUserId(null);
   };
 
-  const admins = [
-    {
-      name: 'Jimi Tadi',
-      image: '/images/jimi.jpg',
-      id: 'B02J36213AP/9rZGO1Ab9LWnID8GxFqwwPoi',
-    },
-  ];
-
-  const users = {
-    firstRow: [
-      {
-        name: 'Roy Josefsson',
-        image: '/images/roy.jpg',
-        id: 'B02J5BVD4AG/WR85XKPrMYhJOlEJX5gdyrWa',
-      },
-      {
-        name: 'Martin Lindström',
-        image: '/images/martin.jpg',
-        id: ' B02JSRJDU00/OvFT630mXlyv5g8i8J2nEMXg',
-      },
-      {
-        name: 'Joel Nord',
-        image: '/images/joel.jpg',
-        id: 'B02J362LARH/kEaC4oxWw0ndLyRm2WFvFUy4',
-      },
-    ],
-    secondRow: [
-      {
-        name: 'John Ghavamzade',
-        image: '/images/john.jpg',
-        id: 'B02HNF6Q5F1/UMfa4EuPO4gnT8uu4tWqNEQ2',
-      },
-      {
-        name: 'Farid Boukhaled',
-        image: '/images/farid.jpg',
-        id: 'B02J36131V1/zjqWl0GEHiUqPjD6rqbeLJFu',
-      },
-      {
-        name: 'John-Eric Uddh',
-        image: '/images/jEric.jpg',
-        id: 'B02JSRDSM0Q/Ker4p52RfxsoABT1ueIcaHZT',
-      },
-    ],
-    thirdRow: [
-      {
-        name: 'Mohammadali Mirzaee',
-        image: '/images/mohammad.jpg',
-        id: 'B02JSQD1NSU/1bzvW6qpgMPQcW8xbRUyJq0e',
-      },
-    ],
-  };
-
-  const userLenth =
-    users.firstRow.length + users.secondRow.length + users.thirdRow.length;
+  const userLenth = users.length + admins.length;
 
   return (
     <Wrapper>
@@ -82,7 +30,7 @@ const Main = () => {
           <p>{userLenth}</p>
         </div>
         <div>
-          <h1 className="ji-team">JTeam</h1>
+          <h1 className="ji-team">Ji-Team</h1>
         </div>
       </article>
 
@@ -106,14 +54,16 @@ const Main = () => {
       <div className="all-card">
         <Container>
           <div className="wrap-card">
-            {users.firstRow.map((x) => (
+            {users.slice(0, 3).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className="circle-status">
-                  <DoneOutlinedIcon style={{ fill: 'red' }} />
+                <div className={x.status ? 'status-color ' : 'circle-status'}>
+                  <DoneOutlinedIcon
+                    style={{ fill: x.status ? 'green' : 'white' }}
+                  />
                 </div>
 
                 <button onClick={() => toggleMessage(x.id)}>
@@ -125,14 +75,16 @@ const Main = () => {
         </Container>
         <Container>
           <div className="wrap-card">
-            {users.secondRow.map((x) => (
+            {users.slice(4, 7).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className="circle-status">
-                  <DoneOutlinedIcon style={{ fill: 'red' }} />
+                <div className={x.status ? 'status-color ' : 'circle-status'}>
+                  <DoneOutlinedIcon
+                    style={{ fill: x.status ? 'green' : 'white' }}
+                  />
                 </div>
                 <button onClick={() => toggleMessage(x.id)}>
                   <p>Send</p>
@@ -143,14 +95,16 @@ const Main = () => {
         </Container>
         <Container>
           <div className="wrap-card">
-            {users.thirdRow.map((x) => (
+            {users.slice(8, 9).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className="circle-status">
-                  <DoneOutlinedIcon style={{ fill: 'red' }} />
+                <div className={x.status ? 'status-color ' : 'circle-status'}>
+                  <DoneOutlinedIcon
+                    style={{ fill: x.status ? 'green' : 'white' }}
+                  />
                 </div>
                 <button onClick={() => toggleMessage(x.id)}>
                   <p>Send</p>
@@ -287,8 +241,16 @@ const Container = styled.div`
         height: 30px;
         width: 30px;
         border-radius: 50px;
-        background: #f9f9f9;
+        background: #ff8787;
+        opacity: 0.6;
         border: 1px solid red;
+      }
+      .status-color {
+        height: 30px;
+        width: 30px;
+        border-radius: 50px;
+        background: #a9fccd;
+        border: 1px solid green;
       }
       button {
         margin-top: 20px;

@@ -1,11 +1,20 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserToGreenAction } from '../../redux/action';
+
 const Message = ({ userId }) => {
   const [valid, setValid] = useState(false);
   const [about, setAbout] = useState('');
   const [message, setMessage] = useState('');
   const [priority, setPriority] = useState(-1);
+  const [name, setName] = useState('');
+  const dispatch = useDispatch();
 
+  /*  const users = useSelector((state) => state.reducer.users);
+
+  console.log(users.map((x) => x.status));
+ */
   /*   const validatAbout = (e) => {
     const about = e.target.value;
     if (about === '') {
@@ -14,6 +23,15 @@ const Message = ({ userId }) => {
     }
     setAbout(about);
   }; */
+
+  const onNameChange = (e) => {
+    const name = e.target.value;
+    setName(name);
+    if (message === '') {
+      setValid(false);
+    }
+    return setValid(true);
+  };
 
   const onMessageChange = (e) => {
     const message = e.target.value;
@@ -27,15 +45,15 @@ const Message = ({ userId }) => {
 
   const priorit = [
     {
-      name: 'Prio 1',
+      prio: 'Prio 1',
       value: 1,
     },
     {
-      name: 'Prio 2',
+      prio: 'Prio 2',
       value: 2,
     },
     {
-      name: 'Prio 3',
+      prio: 'Prio 3',
       value: 3,
     },
   ];
@@ -56,7 +74,6 @@ const Message = ({ userId }) => {
    */
 
   const sendMessage = async () => {
-    console.log({ userId, about, message });
     const response = await fetch(
       'https://api.jiroy.com/api/slack/sendPrivateMessage',
       {
@@ -69,13 +86,12 @@ const Message = ({ userId }) => {
           id: userId,
           message: message,
           priority: priority,
+          name: name,
         }),
       }
     );
+    dispatch(setUserToGreenAction(userId));
     const data = await response.json();
-
-    // Add userId to Redux array
-    console.log(data);
   };
 
   return (
@@ -90,11 +106,14 @@ const Message = ({ userId }) => {
             className="priority"
             value={x.value}
           >
-            {x.name}
+            {x.prio}
           </button>
         ))}
       </div>
+
       <div className="message-area">
+        <p>Name</p>
+        <input value={name} onChange={onNameChange} placeholder="Your Name" />
         <p>Agenda</p>
         <textarea
           value={message}
@@ -155,6 +174,23 @@ const MessageCard = styled.div`
     padding-right: 2rem;
     width: 100%;
     max-width: 100%;
+
+    p {
+      margin-top: 5px;
+      padding-left: 1px;
+      font-size: small;
+      font-weight: 500;
+    }
+    input {
+      margin: 0;
+      width: 50%;
+      height: 2rem;
+      border: none;
+      border-radius: 0.5rem;
+    }
+    input:focus {
+      outline: none;
+    }
 
     .message-Fields {
       width: 100%;
