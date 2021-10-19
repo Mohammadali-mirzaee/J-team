@@ -75,7 +75,7 @@ const Main = () => {
         </Container>
         <Container>
           <div className="wrap-card">
-            {users.slice(4, 7).map((x) => (
+            {users.slice(3, 6).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
@@ -95,7 +95,7 @@ const Main = () => {
         </Container>
         <Container>
           <div className="wrap-card">
-            {users.slice(8, 9).map((x) => (
+            {users.slice(6,7).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
