@@ -1,14 +1,13 @@
 import * as t from './types';
 
 const initState = {
-  admins: [
+  users: [
     {
       name: 'Jimi Tadi',
       image: '/images/jimi.jpg',
       id: 'B02J36213AP/9rZGO1Ab9LWnID8GxFqwwPoi',
+      status: false,
     },
-  ],
-  users: [
     {
       name: 'Roy Josefsson',
       image: '/images/roy.jpg',
@@ -50,6 +49,23 @@ const initState = {
       image: '/images/mohammad.jpg',
       id: 'B02JSQD1NSU/1bzvW6qpgMPQcW8xbRUyJq0e',
       status: false,
+    },
+  ],
+  priorit: [
+    {
+      prio: 'Prio 1',
+      value: 1,
+      changeColor: false,
+    },
+    {
+      prio: 'Prio 2',
+      value: 2,
+      changeColor: false,
+    },
+    {
+      prio: 'Prio 3',
+      value: 3,
+      changeColor: false,
     },
   ],
 };

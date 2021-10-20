@@ -3,12 +3,11 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Message from './Message';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 const Main = () => {
   const [toggle, setToggle] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
   const users = useSelector((state) => state.reducer.users);
-  const admins = useSelector((state) => state.reducer.admins);
 
   function toggleMessage(userId) {
     setToggle(true);
@@ -20,7 +19,7 @@ const Main = () => {
     setSelectedUserId(null);
   };
 
-  const userLenth = users.length + admins.length;
+  const userLenth = users.length;
 
   return (
     <Wrapper>
@@ -34,16 +33,6 @@ const Main = () => {
         </div>
       </article>
 
-      {admins.map((x) => (
-        <Admin>
-          <div onClick={() => toggleMessage(x.id)} className="admin-person">
-            <Image height={60} width={60} src={x.image} />
-            <p>Jimi Tadi</p>
-            <p>Admin</p>
-          </div>
-        </Admin>
-      ))}
-
       {toggle && (
         <Modal>
           <div className="overlay" onClick={closeModal}></div>
@@ -52,20 +41,36 @@ const Main = () => {
       )}
 
       <div className="all-card">
+        <Admin>
+          {users.slice(0, 1).map((x) => (
+            <div className="admin-person">
+              <Image height={60} width={60} src={x.image} />
+              <p>{x.name}</p>
+              <p>Admin</p>
+              <div className={x.status ? 'status-color' : 'circle-status'}>
+                <DoneOutlinedIcon
+                  style={{ fill: x.status ? 'green' : 'white' }}
+                />
+              </div>
+              <button onClick={() => toggleMessage(x.id)}>
+                <p>contact</p>
+              </button>
+            </div>
+          ))}
+        </Admin>
         <Container>
           <div className="wrap-card">
-            {users.slice(0, 3).map((x) => (
+            {users.slice(1, 4).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className={x.status ? 'status-color ' : 'circle-status'}>
+                <div className={x.status ? 'status-color' : 'circle-status'}>
                   <DoneOutlinedIcon
                     style={{ fill: x.status ? 'green' : 'white' }}
                   />
                 </div>
-
                 <button onClick={() => toggleMessage(x.id)}>
                   <p>Send</p>
                 </button>
@@ -75,13 +80,13 @@ const Main = () => {
         </Container>
         <Container>
           <div className="wrap-card">
-            {users.slice(3, 6).map((x) => (
+            {users.slice(4, 7).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
                 </div>
                 <p>{x.name}</p>
-                <div className={x.status ? 'status-color ' : 'circle-status'}>
+                <div className={x.status ? 'status-color' : 'circle-status'}>
                   <DoneOutlinedIcon
                     style={{ fill: x.status ? 'green' : 'white' }}
                   />
@@ -95,7 +100,7 @@ const Main = () => {
         </Container>
         <Container>
           <div className="wrap-card">
-            {users.slice(6,7).map((x) => (
+            {users.slice(7, 8).map((x) => (
               <div>
                 <div className="circle-person">
                   <Image height={100} width={100} src={x.image} />
@@ -289,11 +294,50 @@ const Admin = styled.div`
     justify-content: center;
     flex-direction: column;
     p {
-      margin: 0;
+      padding-top: 0;
+      margin-top: 0;
+      margin-bottom: 0;
       font-weight: 500;
     }
     img {
       border-radius: 50%;
+    }
+    .circle-status {
+      height: 25px;
+      width: 25px;
+      border-radius: 50px;
+      background: #ff8787;
+      opacity: 0.6;
+      border: 1px solid red;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .status-color {
+      height: 30px;
+      width: 30px;
+      border-radius: 50px;
+      background: #a9fccd;
+      border: 1px solid green;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    button {
+      margin-top: 10px;
+      width: 100%;
+      height: 30px;
+      border-radius: 0.5rem;
+      border: none;
+      background: #6b6b6b;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+    button:hover {
+      background: red;
     }
   }
 `;

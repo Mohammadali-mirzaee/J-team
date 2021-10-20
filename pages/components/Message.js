@@ -5,17 +5,13 @@ import { setUserToGreenAction } from '../../redux/action';
 
 const Message = ({ userId }) => {
   const [valid, setValid] = useState(false);
-  const [about, setAbout] = useState('');
   const [message, setMessage] = useState('');
   const [priority, setPriority] = useState(-1);
   const [name, setName] = useState('');
-  const [prioColor, setPrioColor] = useState(false);
   const dispatch = useDispatch();
 
-  /*  const users = useSelector((state) => state.reducer.users);
+  const priorit = useSelector((state) => state.reducer.priorit);
 
-  console.log(users.map((x) => x.status));
- */
   /*   const validatAbout = (e) => {
     const about = e.target.value;
     if (about === '') {
@@ -44,25 +40,9 @@ const Message = ({ userId }) => {
     return setValid(true);
   };
 
-  const priorit = [
-    {
-      prio: 'Prio 1',
-      value: 1,
-    },
-    {
-      prio: 'Prio 2',
-      value: 2,
-    },
-    {
-      prio: 'Prio 3',
-      value: 3,
-    },
-  ];
-
   const onChangePriority = (e, priority) => {
     e.preventDefault();
     setPriority(priority);
-    setPrioColor(true);
   };
 
   /**
@@ -77,6 +57,10 @@ const Message = ({ userId }) => {
    */
 
   const sendMessage = async () => {
+    if (priority < 0) {
+      alert('Välj prioritet');
+      return;
+    }
     const response = await fetch(
       'https://api.jiroy.com/api/slack/sendPrivateMessage',
       {
@@ -97,6 +81,22 @@ const Message = ({ userId }) => {
     const data = await response.json();
   };
 
+  const getColorClassName = (index) => {
+    if (index !== priority) {
+      return '';
+    }
+    switch (index) {
+      case 1:
+        return 'color-red';
+      case 2:
+        return 'color-blue';
+      case 3:
+        return 'color-yellow';
+      default:
+        return '';
+    }
+  };
+
   return (
     <MessageCard>
       <div className="p-text">
@@ -106,7 +106,7 @@ const Message = ({ userId }) => {
         {priorit.map((x) => (
           <button
             onClick={(e) => onChangePriority(e, x.value)}
-            className={prioColor ? 'prioColor' : 'priority '}
+            className={getColorClassName(x.value)}
             value={x.value}
           >
             {x.prio}
@@ -159,25 +159,42 @@ const MessageCard = styled.div`
     align-items: center;
     justify-content: center;
 
-    .priority {
+    button {
       width: 100%;
       height: 2.5rem;
       border-radius: 1rem;
+      margin-right: 1rem;
       background: #c4c4c4;
+      border: none;
+    }
+    button:hover {
+      border: 1px solid #e41513;
+    }
+    .color-red {
+      width: 100%;
+      height: 2.5rem;
+      border-radius: 1rem;
+      background: red;
       margin-right: 1rem;
       border: none;
     }
-    .prioColor {
+    .color-blue {
       width: 100%;
       height: 2.5rem;
       border-radius: 1rem;
       background: green;
       margin-right: 1rem;
       border: none;
+      background: blue;
     }
-    .priority:hover {
-      border: 1px solid #e41513;
-      background: #c4c4c4;
+    .color-yellow {
+      width: 100%;
+      height: 2.5rem;
+      border-radius: 1rem;
+      background: green;
+      margin-right: 1rem;
+      border: none;
+      background: yellow;
     }
   }
   .message-area {
@@ -235,7 +252,7 @@ const MessageCard = styled.div`
       margin-top: 2rem;
     }
   }
-  button:hover {
+  .send-btn:hover {
     background: #e41513;
   }
 `;
