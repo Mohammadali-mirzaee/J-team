@@ -1,1 +1,2 @@
 export const SET_USER_TO_GREEN = 'SET_USER_TO_GREEN';
+export const SET_PRIO_TO_CAHNGE = 'SET_PRIO_TO_CHANGE';

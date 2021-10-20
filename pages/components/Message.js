@@ -9,6 +9,7 @@ const Message = ({ userId }) => {
   const [message, setMessage] = useState('');
   const [priority, setPriority] = useState(-1);
   const [name, setName] = useState('');
+  const [prioColor, setPrioColor] = useState(false);
   const dispatch = useDispatch();
 
   /*  const users = useSelector((state) => state.reducer.users);
@@ -57,9 +58,11 @@ const Message = ({ userId }) => {
       value: 3,
     },
   ];
+
   const onChangePriority = (e, priority) => {
     e.preventDefault();
     setPriority(priority);
+    setPrioColor(true);
   };
 
   /**
@@ -103,7 +106,7 @@ const Message = ({ userId }) => {
         {priorit.map((x) => (
           <button
             onClick={(e) => onChangePriority(e, x.value)}
-            className="priority"
+            className={prioColor ? 'prioColor' : 'priority '}
             value={x.value}
           >
             {x.prio}
@@ -143,8 +146,8 @@ const MessageCard = styled.div`
   text-align: left;
   position: fixed;
   @media (max-width: 768px) {
-    width: 300px;
-    height: 350px;
+    width: 320px;
+    height: 400px;
   }
 
   .priorit-box {
@@ -164,6 +167,14 @@ const MessageCard = styled.div`
       margin-right: 1rem;
       border: none;
     }
+    .prioColor {
+      width: 100%;
+      height: 2.5rem;
+      border-radius: 1rem;
+      background: green;
+      margin-right: 1rem;
+      border: none;
+    }
     .priority:hover {
       border: 1px solid #e41513;
       background: #c4c4c4;
@@ -175,14 +186,16 @@ const MessageCard = styled.div`
     width: 100%;
     max-width: 100%;
 
-    p {
-      margin-top: 5px;
+    > p {
+      margin-top: 0.5rem;
       padding-left: 1px;
       font-size: small;
       font-weight: 500;
+      padding-left: 5px;
+      margin-bottom: 0.5rem;
     }
     input {
-      margin: 0;
+      margin-top: 0;
       width: 50%;
       height: 2rem;
       border: none;
@@ -217,6 +230,10 @@ const MessageCard = styled.div`
     border: none;
     background: #c4c4c4;
     color: white;
+
+    @media (max-width: 768px) {
+      margin-top: 2rem;
+    }
   }
   button:hover {
     background: #e41513;

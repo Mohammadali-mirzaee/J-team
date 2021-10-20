@@ -18,7 +18,7 @@ const initState = {
     {
       name: 'Martin Lindström',
       image: '/images/martin.jpg',
-      id: ' B02JSRJDU00/OvFT630mXlyv5g8i8J2nEMXg',
+      id: 'B02JSRJDU00/OvFT630mXlyv5g8i8J2nEMXg',
       status: false,
     },
     {
