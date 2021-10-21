@@ -28,6 +28,7 @@ const Main = () => {
   useEffect(() => {
     AOS.init({
       duration: 2000,
+      delay: 0,
     });
     AOS.refresh();
   }, []);
@@ -159,6 +160,7 @@ const Wrapper = styled.div`
     margin-top: 5rem;
     height: 100px;
     max-width: 100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -301,6 +303,7 @@ const Container = styled.div`
         align-items: center;
         justify-content: center;
         font-size: 1rem;
+        cursor: pointer;
       }
       button:hover {
         outline: none;
@@ -311,7 +314,6 @@ const Container = styled.div`
   }
 `;
 const Admin = styled.div`
-  padding-top: 2rem;
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -407,14 +409,11 @@ const Day = styled.div`
   max-width: 100%;
   display: flex;
   justify-content: right;
-  padding-right: 15rem;
+  padding-right: 5rem;
   padding-top: 2rem;
   font-size: 1.4rem;
-  position: absolute;
 
   @media (max-width: 768px) {
-    width: 100%;
-    max-width: 100%;
-    padding-right: 4rem;
+    padding-right: 0;
   }
 `;

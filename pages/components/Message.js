@@ -74,6 +74,10 @@ const Message = ({ userId }) => {
       alert('Välj prioritet');
       return;
     }
+    if (message === '') {
+      alert('Skriv din agenda');
+      return;
+    }
     const response = await fetch(
       'https://api.jiroy.com/api/slack/sendPrivateMessage',
       {
@@ -171,12 +175,13 @@ const MessageCard = styled.div`
   }
 
   .MuiPaper-root {
-    background: #b81519;
+    background: #eeeeee;
     display: flex;
     justify-content: center;
+    font-size: 16px;
   }
   .MuiSnackbarContent-message {
-    color: #eeeeee;
+    color: #111;
   }
   .priorit-box {
     padding-left: 2rem;
@@ -194,9 +199,11 @@ const MessageCard = styled.div`
       margin-right: 1rem;
       background: #c4c4c4;
       border: none;
+      color: #111;
+      cursor: pointer;
     }
     button:hover {
-      border: 1px solid #e41513;
+      border: 1px solid #eeeeee;
     }
     .color-red {
       width: 100%;
@@ -275,6 +282,7 @@ const MessageCard = styled.div`
     border: none;
     background: #c4c4c4;
     color: white;
+    font-size: 1.4rem;
 
     @media (max-width: 768px) {
       margin-top: 2rem;

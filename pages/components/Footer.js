@@ -20,7 +20,7 @@ const Footer = () => {
           width={300}
         />
       </div>
-      <b className="logo"></b>
+      <b data-aos={'fade-right'} className="logo"></b>
     </FooterWrap>
   );
 };
