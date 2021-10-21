@@ -322,8 +322,8 @@ const Admin = styled.div`
   display: flex;
   @media (max-width: 768px) {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: left;
+    padding-left: 0;
   }
   .admin-person {
     display: flex;

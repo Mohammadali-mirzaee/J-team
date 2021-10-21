@@ -10,7 +10,7 @@ const Footer = () => {
     });
   }, []);
   return (
-    <FooterWrap data-aos={'fade-up'}>
+    <FooterWrap>
       <div>
         <Image
           data-aos={'fade-right'}
@@ -20,7 +20,7 @@ const Footer = () => {
           width={300}
         />
       </div>
-      <b data-aos={'fade-left'} className="logo"></b>
+      <b className="logo"></b>
     </FooterWrap>
   );
 };
