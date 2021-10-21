@@ -44,7 +44,7 @@ const Main = () => {
           <p>{userLenth}</p>
         </div>
         <div>
-          <h1 className="ji-team">Ji-Team</h1>
+          <h1 className="ji-team">JiTeam</h1>
         </div>
       </article>
 
@@ -97,7 +97,7 @@ const Main = () => {
           </div>
         </Container>
         <Container>
-          <div data-aos={'fade-left'} className="wrap-card">
+          <div data-aos={'fade-right'} className="wrap-card">
             {users.slice(4, 7).map((x) => (
               <div>
                 <div className="circle-person">
@@ -317,6 +317,7 @@ const Admin = styled.div`
   width: 100%;
   max-width: 100%;
   margin: 0;
+  padding-top: 1rem;
   align-items: center;
   justify-content: left;
   padding-left: 5rem;
@@ -408,11 +409,13 @@ const Day = styled.div`
   width: 100%;
   max-width: 100%;
   display: flex;
-  justify-content: right;
-  padding-right: 5rem;
-  padding-top: 2rem;
-  font-size: 1.4rem;
-
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  color: #eeeeee;
+  background: #e41513;
+  border-bottom: 1px solid #111;
   @media (max-width: 768px) {
     padding-right: 0;
   }
