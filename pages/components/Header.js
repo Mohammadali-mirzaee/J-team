@@ -9,6 +9,7 @@ const Header = () => {
           height={25}
           width={25}
           layout="responsive"
+          alt="jiroy"
         />
       </Logo>
     </Head>

@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Message from './Message';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import { useSelector } from 'react-redux';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 const Main = () => {
   const [toggle, setToggle] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
@@ -20,6 +22,13 @@ const Main = () => {
   };
 
   const userLenth = users.length;
+
+  useEffect(() => {
+    AOS.init({
+      duration: 2000,
+    });
+    AOS.refresh();
+  }, []);
 
   return (
     <Wrapper>
@@ -99,7 +108,7 @@ const Main = () => {
           </div>
         </Container>
         <Container>
-          <div className="wrap-card">
+          <div data-aos={'fade-right'} className="wrap-card">
             {users.slice(7, 8).map((x) => (
               <div>
                 <div className="circle-person">
@@ -204,6 +213,7 @@ const Container = styled.div`
     align-items: center;
     padding-top: 3rem;
     width: 70%;
+
     @media (max-width: 768px) {
       width: 100%;
       max-width: 100%;
@@ -223,6 +233,13 @@ const Container = styled.div`
       display: flex;
       align-items: center;
       flex-direction: column;
+      transition: 0.3s ease-in-out;
+
+      &:hover {
+        div {
+          transform: scale(0.9);
+        }
+      }
 
       @media (max-width: 768px) {
         margin-top: 2rem;
@@ -235,7 +252,6 @@ const Container = styled.div`
         height: 100px;
         width: 100px;
         border-radius: 50%;
-        background: #c4c4c4;
         display: flex;
 
         img {

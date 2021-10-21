@@ -1,15 +1,26 @@
 import styled from '@emotion/styled';
 import Image from 'next/image';
-/* import AOS from 'aos';
+import AOS from 'aos';
 import 'aos/dist/aos.css';
-AOS.init(); */
+import { useEffect } from 'react';
 const Footer = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 3000,
+    });
+  }, []);
   return (
-    <FooterWrap>
+    <FooterWrap data-aos={'fade-up'}>
       <div>
-        <Image src="/logotyp-jiroy.svg" height={300} width={300} />
+        <Image
+          data-aos={'fade-right'}
+          alt="jiroy"
+          src="/logotyp-jiroy.svg"
+          height={300}
+          width={300}
+        />
       </div>
-      <b className="logo"></b>
+      <b data-aos={'fade-left'} className="logo"></b>
     </FooterWrap>
   );
 };
