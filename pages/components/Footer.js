@@ -60,6 +60,13 @@ const FooterWrap = styled.footer`
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: transform 0.7s ease-in-out;
+
+    &:hover {
+      .logo {
+        transform: rotate(360deg);
+      }
+    }
     @media (max-width: 768px) {
       height: 150px;
       width: 150px;

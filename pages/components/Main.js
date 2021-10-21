@@ -6,6 +6,8 @@ import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import { useSelector } from 'react-redux';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import dayjs from 'dayjs';
+
 const Main = () => {
   const [toggle, setToggle] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
@@ -30,6 +32,9 @@ const Main = () => {
     AOS.refresh();
   }, []);
 
+  const date = dayjs().format('YYYY-MM-DD');
+  console.log();
+
   return (
     <Wrapper>
       <article>
@@ -50,6 +55,8 @@ const Main = () => {
       )}
 
       <div className="all-card">
+        <Day>{date}</Day>
+
         <Admin>
           {users.slice(0, 1).map((x) => (
             <div className="admin-person">
@@ -67,6 +74,7 @@ const Main = () => {
             </div>
           ))}
         </Admin>
+
         <Container>
           <div data-aos={'fade-right'} className="wrap-card">
             {users.slice(1, 4).map((x) => (
@@ -144,6 +152,8 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     padding-left: 2rem;
     padding-right: 2rem;
+    width: 100%;
+    max-width: 100%;
   }
   article {
     margin-top: 5rem;
@@ -294,20 +304,17 @@ const Container = styled.div`
       }
       button:hover {
         outline: none;
-        background: linear-gradient(
-          to right,
-          #eb3941,
-          #f15e64,
-          #e14e53,
-          #e2373f
-        );
+        background: #b81519;
         box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
       }
     }
   }
 `;
 const Admin = styled.div`
-  margin-top: 2rem;
+  padding-top: 2rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
   align-items: center;
   justify-content: left;
   padding-left: 5rem;
@@ -392,5 +399,22 @@ const Modal = styled.div`
     right: 0;
     bottom: 0;
     left: 0;
+  }
+`;
+
+const Day = styled.div`
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: right;
+  padding-right: 15rem;
+  padding-top: 2rem;
+  font-size: 1.4rem;
+  position: absolute;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 4rem;
   }
 `;

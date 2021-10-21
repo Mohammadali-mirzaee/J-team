@@ -19,6 +19,8 @@ const Header = () => {
 export default Header;
 
 const Head = styled.header`
+  width: 100%;
+  max-width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +29,9 @@ const Head = styled.header`
   max-width: 100%;
   background: #111;
   color: #fff;
+  @media (max-width: 768px) {
+    padding: 0;
+  }
 `;
 const Logo = styled.div`
   width: 80px;

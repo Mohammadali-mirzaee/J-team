@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUserToGreenAction } from '../../redux/action';
+import Snackbar from '@mui/material/Snackbar';
 
 const Message = ({ userId }) => {
   const [valid, setValid] = useState(false);
@@ -9,6 +10,13 @@ const Message = ({ userId }) => {
   const [priority, setPriority] = useState(-1);
   const [name, setName] = useState('');
   const dispatch = useDispatch();
+
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = snackbar;
 
   const priorit = useSelector((state) => state.reducer.priorit);
 
@@ -43,6 +51,11 @@ const Message = ({ userId }) => {
   const onChangePriority = (e, priority) => {
     e.preventDefault();
     setPriority(priority);
+    setSnackbar({ ...snackbar, open: true });
+  };
+
+  const handleClose = () => {
+    setSnackbar({ ...snackbar, open: false });
   };
 
   /**
@@ -82,9 +95,9 @@ const Message = ({ userId }) => {
   };
 
   const getColorClassName = (index) => {
-    if (index !== priority) {
+    /* if (index !== priority) {
       return '';
-    }
+    } */
     switch (index) {
       case 1:
         return 'color-red';
@@ -99,6 +112,13 @@ const Message = ({ userId }) => {
 
   return (
     <MessageCard>
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="You Are Clicked"
+        key={vertical + horizontal}
+      />
       <div className="p-text">
         <p>Prioritera</p>
       </div>
@@ -150,6 +170,14 @@ const MessageCard = styled.div`
     height: 400px;
   }
 
+  .MuiPaper-root {
+    background: #b81519;
+    display: flex;
+    justify-content: center;
+  }
+  .MuiSnackbarContent-message {
+    color: #eeeeee;
+  }
   .priorit-box {
     padding-left: 2rem;
     padding-right: 2rem;
