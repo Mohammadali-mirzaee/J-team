@@ -68,7 +68,7 @@ const Main = () => {
           ))}
         </Admin>
         <Container>
-          <div className="wrap-card">
+          <div data-aos={'fade-right'} className="wrap-card">
             {users.slice(1, 4).map((x) => (
               <div>
                 <div className="circle-person">
@@ -88,7 +88,7 @@ const Main = () => {
           </div>
         </Container>
         <Container>
-          <div className="wrap-card">
+          <div data-aos={'fade-left'} className="wrap-card">
             {users.slice(4, 7).map((x) => (
               <div>
                 <div className="circle-person">
@@ -173,9 +173,15 @@ const Wrapper = styled.div`
           font-size: 1.6rem;
         }
       }
+      &:hover {
+        h1 {
+          color: red;
+        }
+      }
       p {
         padding-left: 1.2rem;
         font-size: 1.8rem;
+        color: red;
         @media (max-width: 768px) {
           font-size: 1.5rem;
         }
@@ -277,7 +283,7 @@ const Container = styled.div`
         margin-top: 20px;
         width: 70%;
         height: 40px;
-        border-radius: 1rem;
+        border-radius: 50px;
         border: none;
         background: #6b6b6b;
         color: #fff;
@@ -287,7 +293,15 @@ const Container = styled.div`
         font-size: 1rem;
       }
       button:hover {
-        background: red;
+        outline: none;
+        background: linear-gradient(
+          to right,
+          #eb3941,
+          #f15e64,
+          #e14e53,
+          #e2373f
+        );
+        box-shadow: 0 5px 15px rgba(242, 97, 103, 0.4);
       }
     }
   }

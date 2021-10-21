@@ -22,7 +22,7 @@ const Head = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 4rem;
+  height: 6rem;
   width: 100%;
   max-width: 100%;
   background: #111;
