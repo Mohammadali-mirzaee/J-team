@@ -16,7 +16,13 @@ const Message = ({ userId }) => {
     vertical: 'top',
     horizontal: 'center',
   });
+  const [seccSnackbar, setSeccSnackbar] = useState({
+    openSecc: false,
+    verticalSecc: 'top',
+    horizontalSecc: 'center',
+  });
   const { vertical, horizontal, open } = snackbar;
+  const { verticalSecc, horizontalSecc, openSecc } = seccSnackbar;
 
   const priorit = useSelector((state) => state.reducer.priorit);
 
@@ -58,6 +64,10 @@ const Message = ({ userId }) => {
     setSnackbar({ ...snackbar, open: false });
   };
 
+  const seccClose = () => {
+    setSeccSnackbar({ ...seccSnackbar, openSecc: false });
+  };
+
   /**
    * const validatAbout = () => {
    * const about = e.target.value
@@ -78,6 +88,8 @@ const Message = ({ userId }) => {
       alert('Skriv din agenda');
       return;
     }
+    setSeccSnackbar({ ...seccSnackbar, openSecc: true });
+
     const response = await fetch(
       'https://api.jiroy.com/api/slack/sendPrivateMessage',
       {
@@ -121,6 +133,13 @@ const Message = ({ userId }) => {
         open={open}
         onClose={handleClose}
         message="You Are Clicked"
+        key={vertical + horizontal}
+      />
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={openSecc}
+        onClose={seccClose}
+        message="Your message Sent"
         key={vertical + horizontal}
       />
       <div className="p-text">
@@ -183,6 +202,7 @@ const MessageCard = styled.div`
   .MuiSnackbarContent-message {
     color: #111;
   }
+
   .priorit-box {
     padding-left: 2rem;
     padding-right: 2rem;

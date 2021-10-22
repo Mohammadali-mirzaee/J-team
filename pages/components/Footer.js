@@ -11,14 +11,15 @@ const Footer = () => {
   }, []);
   return (
     <FooterWrap>
-      <div>
+      <div data-aos={'fade-right'}>
         <Image
-          data-aos={'fade-right'}
+          src="/jiTeam.svg"
+          height={50}
+          width={50}
+          layout="responsive"
           alt="jiroy"
-          src="/logotyp-jiroy.svg"
-          height={300}
-          width={300}
         />
+        <h1>JIROY</h1>
       </div>
       <b data-aos={'fade-right'} className="logo"></b>
     </FooterWrap>
@@ -28,8 +29,8 @@ export default Footer;
 
 const FooterWrap = styled.footer`
   background: #111;
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding-left: 7rem;
+  padding-right: 7rem;
   width: 100%;
   max-width: 100%;
   display: flex;
@@ -40,17 +41,33 @@ const FooterWrap = styled.footer`
     padding-right: 2rem;
   }
   div {
-    padding-top: 5rem;
-    @media (max-width: 768px) {
-      padding-top: 2rem;
+    width: 300px;
+    height: 300px;
+    color: #eeeeee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-      img {
-        width: 150px;
-        height: 150px;
+    > img {
+      width: 80px;
+      padding-right: 2rem;
+      @media (max-width: 768px) {
+        height: 10px;
+        width: 0;
+        padding: 0;
+      }
+    }
+
+    h1 {
+      font-size: 5rem;
+      font-weight: 400;
+      @media (max-width: 768px) {
+        font-size: 4rem;
       }
     }
   }
   .logo {
+    margin-top: 4rem;
     height: 400px;
     width: 400px;
     border: 3vw solid white;
@@ -68,6 +85,7 @@ const FooterWrap = styled.footer`
       }
     }
     @media (max-width: 768px) {
+      display: none;
       height: 150px;
       width: 150px;
       border: 3.9vw solid white;

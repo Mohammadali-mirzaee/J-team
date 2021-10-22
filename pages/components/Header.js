@@ -5,7 +5,7 @@ const Header = () => {
     <Head>
       <Logo>
         <Image
-          src="/logotyp-jiroy.svg"
+          src="/jiTeam.svg"
           height={25}
           width={25}
           layout="responsive"
@@ -24,7 +24,7 @@ const Head = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 6rem;
+  height: 5rem;
   width: 100%;
   max-width: 100%;
   background: #111;
@@ -34,6 +34,6 @@ const Head = styled.header`
   }
 `;
 const Logo = styled.div`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
 `;
