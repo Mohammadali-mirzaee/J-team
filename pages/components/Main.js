@@ -56,8 +56,6 @@ const Main = () => {
       )}
 
       <div className="all-card">
-        <Day>{date}</Day>
-
         <Admin>
           {users.slice(0, 1).map((x) => (
             <div className="admin-person">
@@ -74,6 +72,7 @@ const Main = () => {
               </button>
             </div>
           ))}
+          <Day>{date}</Day>
         </Admin>
 
         <Container>
@@ -318,15 +317,15 @@ const Admin = styled.div`
   max-width: 100%;
   margin: 0;
   padding-top: 1rem;
-  align-items: center;
-  justify-content: left;
+  justify-content: space-between;
   padding-left: 5rem;
   padding-right: 5rem;
   display: flex;
   @media (max-width: 768px) {
     display: flex;
-    justify-content: left;
-    padding-left: 0;
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   .admin-person {
     display: flex;
@@ -406,16 +405,13 @@ const Modal = styled.div`
 `;
 
 const Day = styled.div`
-  width: 100%;
-  max-width: 100%;
   display: flex;
   height: 2rem;
-  justify-content: center;
+  color: red;
+  align-items: center;
+  justify-content: right;
   align-items: center;
   font-size: 1.3rem;
-  color: #eeeeee;
-  background: #e41513;
-  border-bottom: 1px solid #111;
   @media (max-width: 768px) {
     padding-right: 0;
   }
